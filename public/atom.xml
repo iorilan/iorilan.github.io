@@ -4,7 +4,7 @@
   <title><![CDATA[Lan Liang Blog]]></title>
   <link href="http://iorilan.github.io/atom.xml" rel="self"/>
   <link href="http://iorilan.github.io/"/>
-  <updated>2015-01-08T23:44:36+08:00</updated>
+  <updated>2015-01-08T23:51:55+08:00</updated>
   <id>http://iorilan.github.io/</id>
   <author>
     <name><![CDATA[Lan Liang]]></name>
@@ -14,13 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[First Blog]]></title>
-    <link href="http://iorilan.github.io/blog/2015/01/08/first-blog/"/>
-    <updated>2015-01-08T22:53:29+08:00</updated>
-    <id>http://iorilan.github.io/blog/2015/01/08/first-blog</id>
-    <content type="html"><![CDATA[<p>Below is C# code</p>
-
-<p>Console.WriteLine(&ldquo;Hello , World&rdquo;);</p>
+    <title type="html"><![CDATA[Hello]]></title>
+    <link href="http://iorilan.github.io/blog/2015/01/08/hello/"/>
+    <updated>2015-01-08T23:50:09+08:00</updated>
+    <id>http://iorilan.github.io/blog/2015/01/08/hello</id>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
