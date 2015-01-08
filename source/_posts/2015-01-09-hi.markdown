@@ -1,0 +1,7 @@
+---
+layout: post
+title: "hi"
+date: 2015-01-09 01:24:07 +0800
+comments: true
+categories: 
+---
