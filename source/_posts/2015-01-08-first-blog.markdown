@@ -7,6 +7,4 @@ categories:
 ---
 Below is C# code
 
-{% codeblock lang:C# %}
 Console.WriteLine("Hello , World");
-{% endcodeblock %}
