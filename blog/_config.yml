@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-email:
-language:
+title: Lan Liang Blog 
+subtitle: On the way from coder to be programmer
+description: A Coder
+author: Lan Liang
+email: iorilan@hotmail.com
+language: Mandarin,  English
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -40,7 +40,7 @@ highlight:
   tab_replace:
 
 # Category & Tag
-default_category: uncategorized
+default_category: Talk
 category_map:
 tag_map:
 
