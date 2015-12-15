@@ -4,17 +4,86 @@
 
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | Lan Liang Blog</title>
+  <title>Software Architecture Evolution [structure] | Lan Liang Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lan Liang Blog">
-<meta property="og:url" content="http://www.lan-liang.me/archives/2015/">
+  <meta name="description" content="before
+
+Http
+
+Http Handler, Http Module , MVC .
+
+
+Balancer
+
+route request based on : ip, header.
+
+
+Cache
+
+static page cache .redis.NoSql.
+
+
+Web Servers
+
+slaves .
+
+
+Data
+master.slaves.blob storage.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Software Architecture Evolution [structure]">
+<meta property="og:url" content="http://www.lan-liang.me/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/">
 <meta property="og:site_name" content="Lan Liang Blog">
-<meta property="og:description">
+<meta property="og:description" content="before
+
+Http
+
+Http Handler, Http Module , MVC .
+
+
+Balancer
+
+route request based on : ip, header.
+
+
+Cache
+
+static page cache .redis.NoSql.
+
+
+Web Servers
+
+slaves .
+
+
+Data
+master.slaves.blob storage.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lan Liang Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Software Architecture Evolution [structure]">
+<meta name="twitter:description" content="before
+
+Http
+
+Http Handler, Http Module , MVC .
+
+
+Balancer
+
+route request based on : ip, header.
+
+
+Cache
+
+static page cache .redis.NoSql.
+
+
+Web Servers
+
+slaves .
+
+
+Data
+master.slaves.blob storage.">
 
   
     <link rel="alternative" href="/atom.xml" title="Lan Liang Blog" type="application/atom+xml">
@@ -62,172 +131,150 @@
   </div>
 </div>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/12/Software-Evolution-Business-View/" class="archive-article-date">
-  <time datetime="2015-12-12T14:49:05.000Z" itemprop="datePublished">Dec 12</time>
+        <section id="main"><article id="post-Software-Architecture-Evolution-From-traditional-to-now" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/" class="article-date">
+  <time datetime="2015-12-12T13:49:05.000Z" itemprop="datePublished">Dec 12 2015</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design/">Design</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/12/Software-Evolution-Business-View/">software architecture evolution [business view]</a>
+    <h1 class="article-title" itemprop="name">
+      Software Architecture Evolution [structure]
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/" class="archive-article-date">
-  <time datetime="2015-12-12T13:49:05.000Z" itemprop="datePublished">Dec 12</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/">Software Architecture Evolution [structure]</a>
-    </h1>
-  
+        <h2 id="before">before</h2>
+<ul>
+<li><p>Http</p>
+<blockquote>
+<p>Http Handler, Http Module , MVC .</p>
+</blockquote>
+</li>
+<li><p>Balancer</p>
+<blockquote>
+<p>route request based on : ip, header.</p>
+</blockquote>
+</li>
+<li><p>Cache</p>
+<blockquote>
+<p>static page cache .<br>redis.<br>NoSql.</p>
+</blockquote>
+</li>
+<li><p>Web Servers</p>
+<blockquote>
+<p>slaves .</p>
+</blockquote>
+</li>
+<li>Data<blockquote>
+<p>master.<br>slaves.<br>blob storage.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="now">now</h2>
+<ul>
+<li>Http</li>
+<li>CDN</li>
+<li><p>load balancer</p>
+<blockquote>
+<p>static balancer. based on conection/request information .</p>
+<p>dynamic balancer. looping , LRU(last recent used) , business</p>
+</blockquote>
+</li>
+<li><p>Page Caching</p>
+</li>
+<li>Service<blockquote>
+<p>business library , service framework, message queue, cache , crosscutting concern(logging , security, exception, monitor)</p>
+</blockquote>
+</li>
+<li>Data<blockquote>
+<p>Sql Db, NoSql, Blob, Redis</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Concerns">Concerns</h2>
+<ul>
+<li><p>Performance those are matters to user</p>
+<blockquote>
+<p>static resource.<br>async request/response.</p>
+</blockquote>
+</li>
+<li><p>Read/Write Seperate , content request optimize</p>
+<blockquote>
+<p>CDN.<br>proxy layer caching results.</p>
+</blockquote>
+</li>
+<li><p>Logic/Flow optimize</p>
+<blockquote>
+<p>parreller processing.<br>async.</p>
+</blockquote>
+</li>
+<li><p>Monitor</p>
+<blockquote>
+<p>logging , warning system.<br>visualize system state real time.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Others">Others</h2>
+<blockquote>
+<p>technic following business , if you are not going need it , dont use it for fun!<br>every problem is a good case to understand the system , dont just stop at making it work , dig out the root reason .<br>real time monitor is important , which will help to predict something wrong in advance .<br>code review , pair programming .</p>
+</blockquote>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/10/04/a-coder-career/" class="archive-article-date">
-  <time datetime="2015-10-04T08:49:05.000Z" itemprop="datePublished">Oct 4</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/04/a-coder-career/">The story about processing as a team</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/04/25/Good-Or-Bad/" class="archive-article-date">
-  <time datetime="2015-04-25T08:56:00.000Z" itemprop="datePublished">Apr 25</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lan-liang.me/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/" data-id="txzp552wfhdy0v8r" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/25/Good-Or-Bad/">Good Or Bad</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/04/13/AboutConcurrency/" class="archive-article-date">
-  <time datetime="2015-04-13T14:49:05.000Z" itemprop="datePublished">Apr 13</time>
-</a>
+        <a href="http://www.lan-liang.me/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/#disqus_thread" class="article-comment-link">Comments</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/13/AboutConcurrency/">About Concurrency</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/04/12/Priority/" class="archive-article-date">
-  <time datetime="2015-04-12T08:14:36.000Z" itemprop="datePublished">Apr 12</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/12/Priority/">Priority</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/01/10/MarkDown Study/" class="archive-article-date">
-  <time datetime="2015-01-10T14:54:39.315Z" itemprop="datePublished">Jan 10</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/10/MarkDown Study/">Mark Down Study</a>
-    </h1>
+    <a href="/2015/12/12/Software-Evolution-Business-View/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          software architecture evolution [business view]
+        
+      </div>
+    </a>
   
+  
+    <a href="/2015/10/04/a-coder-career/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">The story about processing as a team</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/01/10/Hexo Config/" class="archive-article-date">
-  <time datetime="2015-01-10T08:25:59.000Z" itemprop="datePublished">Jan 10</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/10/Hexo Config/">Setup your blog with github+hexo</a>
-    </h1>
-  
 
-    </header>
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
-</article>
-  
-  
-    </div></section>
-  
+</section>
 </section>
         
           
@@ -317,11 +364,13 @@
 <script>
   var disqus_shortname = 'iorilan';
   
+  var disqus_url = 'http://www.lan-liang.me/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
