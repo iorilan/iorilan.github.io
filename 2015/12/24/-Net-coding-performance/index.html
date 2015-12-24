@@ -98,8 +98,8 @@ In a managed process there are two types of heaps—native and managed. Native h
       
         <h2 id="[GC_Basic]">[GC Basic]</h2>
 <blockquote>
-<p>In a managed process there are two types of heaps—native and managed. Native heaps are allocated with the VirtualAlloc Windows API and used by the operating system and CLR for unmanaged memory such as that for the Windows API, OS data structures, and even much of the CLR. The CLR allocates all managed .NET objects on the managed heap, also called the GC heap, because the objects on it are subject to garbage collection.</p>
-<p>If it will not fit in an existing spot, then the allocator will expand the current boundaries of gen 0 to accommodate the new object. If this pushes past the end of the segment, it may trigger a garbage collection.<br> <a id="more"></a></p>
+<p>In a managed process there are two types of heaps—native and managed. Native heaps are allocated with the VirtualAlloc Windows API and used by the operating system and CLR for unmanaged memory such as that for the Windows API, OS data structures, and even much of the CLR. The CLR allocates all managed .NET objects on the managed heap, also called the GC heap, because the objects on it are subject to garbage collection.<br><a id="more"></a></p>
+<p>If it will not fit in an existing spot, then the allocator will expand the current boundaries of gen 0 to accommodate the new object. If this pushes past the end of the segment, it may trigger a garbage collection.</p>
 <p>When a garbage collection occurs, a compaction may occur, in which case the GC physically moves the objects to a new location to free space in the segment.</p>
 <p>Compaction may occur in the collection of any generation and this is a relatively expensive process because the GC must fix up all of the references to those objects so they point to the new location, which may require pausing all managed threads.</p>
 <p>This means that if you allocate a tree of a million objects, as long as you cut off that root reference before the next GC, those million objects contribute nothing to the amount of time the GC takes.</p>
