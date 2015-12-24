@@ -66,6 +66,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post--Net-coding-performance" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/24/-Net-coding-performance/" class="article-date">
+  <time datetime="2015-12-24T06:21:15.000Z" itemprop="datePublished">Dec 24 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design/">Design</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/24/-Net-coding-performance/">About .Net coding performance</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="[GC_Basic]">[GC Basic]</h2>
+<blockquote>
+<p>In a managed process there are two types of heaps—native and managed. Native heaps are allocated with the VirtualAlloc Windows API and used by the operating system and CLR for unmanaged memory such as that for the Windows API, OS data structures, and even much of the CLR. The CLR allocates all managed .NET objects on the managed heap, also called the GC heap, because the objects on it are subject to garbage collection.</p>
+<p>If it will not fit in an existing spot, then the allocator will expand the current boundaries of gen 0 to accommodate the new object. If this pushes past the end of the segment, it may trigger a garbage collection.<br> 
+        
+          <p class="article-more-link">
+            <a href="/2015/12/24/-Net-coding-performance/#more">More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lan-liang.me/2015/12/24/-Net-coding-performance/" data-id="l2qaoe3euxd80qhg" class="article-share-link">Share</a>
+      
+        <a href="http://www.lan-liang.me/2015/12/24/-Net-coding-performance/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Software-Evolution-Business-View" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/12/Software-Evolution-Business-View/" class="article-date">
@@ -108,21 +160,12 @@
 <blockquote>
 <p>whole system should be devided into different small systems.<br>provide consistant interfaces .<br>Restful , RPC interface.</p>
 </blockquote>
-</li>
-</ul>
-<h2 id="evolution_concerns">evolution concerns</h2>
-<ul>
-<li>scalability.</li>
-<li>performance.</li>
-<li>high availability.</li>
-<li>extensibility.</li>
-<li>security.</li>
-</ul>
-<h2 id="important">important</h2>
-<blockquote>
-<p>software architecture is always following business evolution, no perfect static architecture . each time new design should consider business stability and scalability.</p>
-</blockquote>
 
+        
+          <p class="article-more-link">
+            <a href="/2015/12/12/Software-Evolution-Business-View/#more">More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -193,55 +236,12 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="now">now</h2>
-<ul>
-<li>Http</li>
-<li>CDN</li>
-<li><p>load balancer</p>
-<blockquote>
-<p>static balancer. based on conection/request information .</p>
-<p>dynamic balancer. looping , LRU(last recent used) , business</p>
-</blockquote>
-</li>
-<li><p>Page Caching</p>
-</li>
-<li>Service<blockquote>
-<p>business library , service framework, message queue, cache , crosscutting concern(logging , security, exception, monitor)</p>
-</blockquote>
-</li>
-<li>Data<blockquote>
-<p>Sql Db, NoSql, Blob, Redis</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Concerns">Concerns</h2>
-<ul>
-<li><p>Performance those are matters to user</p>
-<blockquote>
-<p>static resource.<br>async request/response.</p>
-</blockquote>
-</li>
-<li><p>Read/Write Seperate , content request optimize</p>
-<blockquote>
-<p>CDN.<br>proxy layer caching results.</p>
-</blockquote>
-</li>
-<li><p>Logic/Flow optimize</p>
-<blockquote>
-<p>parreller processing.<br>async.</p>
-</blockquote>
-</li>
-<li><p>Monitor</p>
-<blockquote>
-<p>logging , warning system.<br>visualize system state real time.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Others">Others</h2>
-<blockquote>
-<p>technic following business , if you are not going need it , dont use it for fun!<br>every problem is a good case to understand the system , dont just stop at making it work , dig out the root reason .<br>real time monitor is important , which will help to predict something wrong in advance .<br>code review , pair programming .</p>
-</blockquote>
 
+        
+          <p class="article-more-link">
+            <a href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/#more">More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -489,60 +489,6 @@
 
 
   
-    <article id="post-MarkDown Study" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/01/10/MarkDown Study/" class="article-date">
-  <time datetime="2015-01-10T14:54:39.315Z" itemprop="datePublished">Jan 10 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/tools/">tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/10/MarkDown Study/">Mark Down Study</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>headers</li>
-</ul>
-<p>— #first header </p>
-<h1 id="first_header">first header</h1>
-
-        
-          <p class="article-more-link">
-            <a href="/2015/01/10/MarkDown Study/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/01/10/MarkDown Study/" data-id="um10r7agmbtnr3b3" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2015/01/10/MarkDown Study/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mark-down/">mark down</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -557,7 +503,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Career/">Career</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design/">Design</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Career/">Career</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design/">Design</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -567,6 +513,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget recents">
       <ul>
+        
+          <li>
+            <a href="/2015/12/24/-Net-coding-performance/">About .Net coding performance</a>
+          </li>
         
           <li>
             <a href="/2015/12/12/Software-Evolution-Business-View/">software architecture evolution [business view]</a>
@@ -584,10 +534,6 @@
             <a href="/2015/04/25/Good-Or-Bad/">Good Or Bad</a>
           </li>
         
-          <li>
-            <a href="/2015/04/13/AboutConcurrency/">About Concurrency</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -597,7 +543,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Environment/">Environment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Team/">Team</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mark-down/">mark down</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Environment/">Environment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Team/">Team</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mark-down/">mark down</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -606,7 +552,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
