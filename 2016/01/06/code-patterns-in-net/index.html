@@ -129,14 +129,23 @@
 
 <p>用法很简单，就是使用内存（或NOSQL）作为缓存，访问时check，不存在则缓存之。</p>
 <h2 id="6-_Facade">6. Facade</h2>
-<pre><code>&gt;代码不再赘述，就是对逻辑的封装，将代码抽象程度提高一个级别。 虽然看上去是wrapper，但对于代码复杂度管理的意义来说，远不止这些。
-</code></pre><h2 id="7-_Observer">7. Observer</h2>
-<pre><code>&gt;当需要创建订阅机制，或设计中包含有<span class="keyword">callback</span>思路的，都可以使用观察者模式来解决，甚至WebHook这种昂贵的设计也属于观察者模型。
-</code></pre><h2 id="8_Producer-Consumer">8 Producer-Consumer</h2>
-<pre><code>&gt;虽然是多线程场景中出现的模式，但依然是很使用的一种模型。 简单场景考虑BlockingCollection&lt;T&gt;，复杂过程考虑自己创建集合，但是每次<span class="keyword">Add</span>或Take元素时注意<span class="keyword">Lock</span>的方式，可以根据具体场合考虑是否真的需要<span class="keyword">lock</span>。
-</code></pre><p>```<br>IProduce<t, tresult=""> {<br>    TResult Produce(T t);<br>    bool Done {get;}<br>}<br>SampleProducer: IProduce<string, string="">{<br>    …<br>}</string,></t,></p>
+<blockquote>
+<p>代码不再赘述，就是对逻辑的封装，将代码抽象程度提高一个级别。 虽然看上去是wrapper，但对于代码复杂度管理的意义来说，远不止这些。</p>
+</blockquote>
+<h2 id="7-_Observer">7. Observer</h2>
+<blockquote>
+<p>当需要创建订阅机制，或设计中包含有callback思路的，都可以使用观察者模式来解决，甚至WebHook这种昂贵的设计也属于观察者模型。</p>
+</blockquote>
+<h2 id="8_Producer-Consumer">8 Producer-Consumer</h2>
+<blockquote>
+<p>虽然是多线程场景中出现的模式，但依然是很使用的一种模型。 简单场景考虑BlockingCollection<t>，复杂过程考虑自己创建集合，但是每次Add或Take元素时注意Lock的方式，可以根据具体场合考虑是否真的需要lock。</t></p>
+</blockquote>
+<p>```<br>IProduce<t, tresult=""> {<br>    TResult Produce(T t);<br>    bool Done {get;}<br>}<br>SampleProducer: IProduce<string, string="">{<br>    …<br>}</string,></t,></p>
 <p>IConsume<t> {<br>    void Consume(T t);<br>}<br>SampleConsumer: IConsume<string><br>{<br>    …<br>}<br>…<br>var q = new ConcurrentQueue<string>();<br>Task.StartNew(() =&gt; {<br>    //…<br>    string parameter;<br>    IProducer<t> producer = factory.Create<sampleproducer<string>&gt;();<br>    while(!producer.Done){<br>        q.Enqueue(producer.Produce(parameter));<br>    }<br>});</sampleproducer<string></t></string></string></t></p>
-<p>Task.StartNew(() =&gt; {<br>    //…<br>    var consumer = factory.Create<sampleconsumer<string>&gt;();<br>    while(!allProducersNotFinishAdding &amp;&amp; !q.IsEmpty){<br>        consumer.Consume(q.Dequeue());<br>    }<br>});<br>难点在于当有多个Producer时，需要判断它们的添加工作是否都已经完成，可以考虑对它们同时加锁，比较昂贵，程序完成后，需要考虑仅ReaderLock是否就已经足够了。</sampleconsumer<string></p>
+<p>Task.StartNew(() =&gt; {<br>    //…<br>    var consumer = factory.Create<sampleconsumer<string>&gt;();<br>    while(!allProducersNotFinishAdding &amp;&amp; !q.IsEmpty){<br>        consumer.Consume(q.Dequeue());<br>    }<br>});</sampleconsumer<string></p>
+<blockquote>
+<p>难点在于当有多个Producer时，需要判断它们的添加工作是否都已经完成，可以考虑对它们同时加锁，比较昂贵，程序完成后，需要考虑仅ReaderLock是否就已经足够了。</p>
+</blockquote>
 <h2 id="Last">Last</h2>
 <ul>
 <li>rules over patterns .</li>
