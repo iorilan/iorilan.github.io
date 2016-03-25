@@ -95,19 +95,19 @@
 <h2 id="HA">HA</h2>
 <ul>
 <li>single machine, any hardware or exception happens , service will be down.</li>
-<li>to make service HA , has to change single noce to cluster.</li>
+<li>to make service HA , has to change single node to cluster.</li>
 </ul>
 <h3 id="Service_Gateway">Service Gateway</h3>
 <ul>
-<li>DNS Heartbeat IP + IP binding. new comming machine will be located ip automaticly.</li>
+<li>DNS Heartbeat IP + IP binding. so that new comming machine will be located ip automaticly.</li>
 </ul>
 <h3 id="Business_Layer">Business Layer</h3>
 <ul>
-<li>Stateless , RPC (Remote Procedure call) service framework.</li>
+<li>keep stateless ,and use RPC (Remote Procedure call) service framework to do API call.</li>
 </ul>
 <h3 id="Cache">Cache</h3>
 <ul>
-<li>multiple cache server ,K-V Db.</li>
+<li>multiple cache server , use K-V Db. (should be careful with cache and DB syncronization)</li>
 </ul>
 <h3 id="DB">DB</h3>
 <ul>
@@ -115,15 +115,15 @@
 </ul>
 <h2 id="Scalable">Scalable</h2>
 <ul>
-<li>As business grows ,the increasing valumn can be supported by adding new node (machine) into existing cluster , then it means the service is scalable .</li>
+<li>defination : As business grows ,the increasing valumn can be supported by adding new node (machine) into existing cluster , then it means the service is scalable (or scale out).</li>
 </ul>
 <h3 id="Service_Gateway-1">Service Gateway</h3>
 <ul>
-<li>multiple request distribution server, Ngix.</li>
+<li>request distribution server cluster, consider Ngix servers.</li>
 </ul>
 <h3 id="Business_Layer-1">Business Layer</h3>
 <ul>
-<li>Stateless, RPC (Remote Procedure call) service framework.</li>
+<li>keep Stateless, RPC (Remote Procedure call) service framework.</li>
 </ul>
 <h3 id="Cache-1">Cache</h3>
 <ul>
