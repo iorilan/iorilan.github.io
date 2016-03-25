@@ -4,17 +4,17 @@
 
   <meta charset="utf-8">
   
-  <title>Lan Liang Blog</title>
+  <title>a_note_scale_out | Lan Liang Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iorilan@hotmail.com">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lan Liang Blog">
-<meta property="og:url" content="http://www.lan-liang.me/page/2/">
+  <meta name="description" content="Scale out  = High Availablility + Scalable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="a_note_scale_out">
+<meta property="og:url" content="http://www.lan-liang.me/2016/03/25/a-note-scale-out/">
 <meta property="og:site_name" content="Lan Liang Blog">
-<meta property="og:description" content="iorilan@hotmail.com">
+<meta property="og:description" content="Scale out  = High Availablility + Scalable">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lan Liang Blog">
-<meta name="twitter:description" content="iorilan@hotmail.com">
+<meta name="twitter:title" content="a_note_scale_out">
+<meta name="twitter:description" content="Scale out  = High Availablility + Scalable">
 
   
     <link rel="alternative" href="/atom.xml" title="Lan Liang Blog" type="application/atom+xml">
@@ -64,12 +64,10 @@
   </div>
 </div>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-AboutConcurrency" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-a-note-scale-out" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/04/13/AboutConcurrency/" class="article-date">
-  <time datetime="2015-04-13T14:49:05.000Z" itemprop="datePublished">Apr 13 2015</time>
+    <a href="/2016/03/25/a-note-scale-out/" class="article-date">
+  <time datetime="2016-03-25T08:06:40.000Z" itemprop="datePublished">Mar 25 2016</time>
 </a>
     
   <div class="article-category">
@@ -83,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/13/AboutConcurrency/">About Concurrency</a>
+    <h1 class="article-title" itemprop="name">
+      a_note_scale_out
     </h1>
   
 
@@ -92,22 +90,66 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Deploy">Deploy</h2>
+        <h1 id="Scale_out_=_High_Availablility_+_Scalable">Scale out  = High Availablility + Scalable</h1>
+<p><a id="more"></a></p>
+<h2 id="HA">HA</h2>
 <ul>
-<li>Hardware Route — Load Balancer</li>
-<li>Software Route — ip/url mapping</li>
-<li>Tcp/Udp level route<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/04/13/AboutConcurrency/#more">More</a>
-          </p>
-        
+<li>single machine, any hardware or exception happens , service will be down.</li>
+<li>to make service HA , has to change single noce to cluster.</li>
+</ul>
+<h3 id="Service_Gateway">Service Gateway</h3>
+<ul>
+<li>DNS Heartbeat IP + IP binding. new comming machine will be located ip automaticly.</li>
+</ul>
+<h3 id="Business_Layer">Business Layer</h3>
+<ul>
+<li>Stateless , RPC (Remote Procedure call) service framework.</li>
+</ul>
+<h3 id="Cache">Cache</h3>
+<ul>
+<li>multiple cache server ,K-V Db.</li>
+</ul>
+<h3 id="DB">DB</h3>
+<ul>
+<li>ReplicaSet. master + slave.</li>
+</ul>
+<h2 id="Scalable">Scalable</h2>
+<ul>
+<li>As business grows ,the increasing valumn can be supported by adding new node (machine) into existing cluster , then it means the service is scalable .</li>
+</ul>
+<h3 id="Service_Gateway-1">Service Gateway</h3>
+<ul>
+<li>multiple request distribution server, Ngix.</li>
+</ul>
+<h3 id="Business_Layer-1">Business Layer</h3>
+<ul>
+<li>Stateless, RPC (Remote Procedure call) service framework.</li>
+</ul>
+<h3 id="Cache-1">Cache</h3>
+<ul>
+<li>Consistent Hashing algorithm .</li>
+</ul>
+<h3 id="DB-1">DB</h3>
+<ul>
+<li>Sharding , Data Routing strategy + Distributed Table.</li>
+</ul>
+
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- bb -->
+			<ins class="adsbygoogle"
+				 style="display:block"
+				 data-ad-client="ca-pub-1921328751842505"
+				 data-ad-slot="2140869273"
+				 data-ad-format="auto"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/04/13/AboutConcurrency/" data-id="j7ubtcq7qcdikjoo" class="article-share-link">Share</a>
+      <a data-url="http://www.lan-liang.me/2016/03/25/a-note-scale-out/" data-id="qtiui3drog6neslh" class="article-share-link">Share</a>
       
-        <a href="http://www.lan-liang.me/2015/04/13/AboutConcurrency/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://www.lan-liang.me/2016/03/25/a-note-scale-out/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
@@ -115,179 +157,26 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Priority" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/04/12/Priority/" class="article-date">
-  <time datetime="2015-04-12T08:14:36.000Z" itemprop="datePublished">Apr 12 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Software-Engineering/">Software Engineering</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/12/Priority/">Priority</a>
-    </h1>
+    <a href="/2016/01/06/code-patterns-in-net/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Code Patterns in .Net</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="working_software_over_coding_quality">working software over coding quality</h2>
-<ul>
-<li>People like to share his coding style, but first of all , make your stuff works , show me your application , then share with me how you did and your unit test.</li>
-<li>keeping it simple is always over a so called “perfect design”, do not waste your time.</li>
-<li>trust agile does not only means being sensitive to bad codes and attack it ,but also, more important is shut up make it works ,refactor and finish your test.</li>
-</ul>
-
-        
-          <p class="article-more-link">
-            <a href="/2015/04/12/Priority/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/04/12/Priority/" data-id="p8ahgf3znuday2lp" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2015/04/12/Priority/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-  
-    <article id="post-MarkDown Study" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/01/10/MarkDown Study/" class="article-date">
-  <time datetime="2015-01-10T14:54:39.315Z" itemprop="datePublished">Jan 10 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/tools/">tools</a>
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/10/MarkDown Study/">Mark Down Study</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>headers</li>
-</ul>
-<p>— #first header </p>
-<h1 id="first_header">first header</h1>
-
-        
-          <p class="article-more-link">
-            <a href="/2015/01/10/MarkDown Study/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/01/10/MarkDown Study/" data-id="um10r7agmbtnr3b3" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2015/01/10/MarkDown Study/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mark-down/">mark down</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hexo Config" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/01/10/Hexo Config/" class="article-date">
-  <time datetime="2015-01-10T08:25:59.000Z" itemprop="datePublished">Jan 10 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/tools/">tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/10/Hexo Config/">Setup your blog with github+hexo</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="setup_[username]-github-io">setup [username].github.io</h2>
-<ul>
-<li>create git repo ,repo name is [username].github.io</li>
-<li>put something.txt and push to your master </li>
-<li>access [username].github.io </li>
-<li>first time access it will takes around 10-20 mins</li>
-<li>make sure your github.io works then start hexo setup.
-        
-          <p class="article-more-link">
-            <a href="/2015/01/10/Hexo Config/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/01/10/Hexo Config/" data-id="4h762h9w5uiszuf0" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2015/01/10/Hexo Config/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Environment/">Environment</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
+</section>
 </section>
         
           
@@ -379,11 +268,13 @@
 <script>
   var disqus_shortname = 'iorilan';
   
+  var disqus_url = 'http://www.lan-liang.me/2016/03/25/a-note-scale-out/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
