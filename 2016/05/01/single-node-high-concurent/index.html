@@ -4,29 +4,42 @@
 
   <meta charset="utf-8">
   
-  <title>software architecture evolution [business view] | Lan Liang Blog</title>
+  <title>single_node_high_concurent | Lan Liang Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Including
+  <meta name="description" content="UI Layer
 
-Access Point
+html UI filter. gray the submit button for 5 seconds after click
+JS submit filter. limit every 5 seconds can submit form once
+cache all static pages 
 
-Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
+Cache
+
+e.g. uid filter.cache result , f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="software architecture evolution [business view]">
-<meta property="og:url" content="http://www.lan-liang.me/2015/12/12/Software-Evolution-Business-View/">
+<meta property="og:title" content="single_node_high_concurent">
+<meta property="og:url" content="http://www.lan-liang.me/2016/05/01/single-node-high-concurent/">
 <meta property="og:site_name" content="Lan Liang Blog">
-<meta property="og:description" content="Including
+<meta property="og:description" content="UI Layer
 
-Access Point
+html UI filter. gray the submit button for 5 seconds after click
+JS submit filter. limit every 5 seconds can submit form once
+cache all static pages 
 
-Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
+Cache
+
+e.g. uid filter.cache result , f">
+<meta property="og:image" content="http://www.lan-liang.me/img/Single_node_structure_process_high_concurrent.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="software architecture evolution [business view]">
-<meta name="twitter:description" content="Including
+<meta name="twitter:title" content="single_node_high_concurent">
+<meta name="twitter:description" content="UI Layer
 
-Access Point
+html UI filter. gray the submit button for 5 seconds after click
+JS submit filter. limit every 5 seconds can submit form once
+cache all static pages 
 
-Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
+Cache
+
+e.g. uid filter.cache result , f">
 
   
     <link rel="alternative" href="/atom.xml" title="Lan Liang Blog" type="application/atom+xml">
@@ -76,10 +89,10 @@ Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
   </div>
 </div>
       <div class="outer">
-        <section id="main"><article id="post-Software-Evolution-Business-View" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-single-node-high-concurent" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/12/12/Software-Evolution-Business-View/" class="article-date">
-  <time datetime="2015-12-12T14:49:05.000Z" itemprop="datePublished">Dec 12 2015</time>
+    <a href="/2016/05/01/single-node-high-concurent/" class="article-date">
+  <time datetime="2016-05-01T09:49:19.000Z" itemprop="datePublished">May 1 2016</time>
 </a>
     
   <div class="article-category">
@@ -94,7 +107,7 @@ Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
         
   
     <h1 class="article-title" itemprop="name">
-      software architecture evolution [business view]
+      single_node_high_concurent
     </h1>
   
 
@@ -102,37 +115,23 @@ Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Including">Including</h2>
+        <h1 id="UI_Layer">UI Layer</h1>
 <ul>
-<li><p>Access Point</p>
-<blockquote>
-<p>Clients : mobile (IOS , adroid, WP) , API, WAP ;<br>third party systems .</p>
-<a id="more"></a>
-</blockquote>
-</li>
-<li><p>proxies</p>
-<blockquote>
-<p>payment gateway , google API..</p>
-</blockquote>
-</li>
-<li><p>micro system</p>
-<blockquote>
-<p>whole system should be devided into different small systems.<br>provide consistant interfaces .<br>Restful , RPC interface.</p>
-</blockquote>
-</li>
+<li>html UI filter. gray the submit button for 5 seconds after click</li>
+<li>JS submit filter. limit every 5 seconds can submit form once</li>
+<li>cache all static pages </li>
 </ul>
-<h2 id="evolution_concerns">evolution concerns</h2>
+<h1 id="Cache">Cache</h1>
 <ul>
-<li>scalability.</li>
-<li>performance.</li>
-<li>high availability.</li>
-<li>extensibility.</li>
-<li>security.</li>
+<li>e.g. uid filter.cache result <uid, result="">, for same user request within 5 seconds , return from cache. </uid,></li>
 </ul>
-<h2 id="important">important</h2>
-<blockquote>
-<p>software architecture is always following business evolution, no perfect static architecture . each time new design should consider business stability and scalability.</p>
-</blockquote>
+<h1 id="Service">Service</h1>
+<ul>
+<li>K-V Cache. only get first X thousands requests.</li>
+</ul>
+<h1 id="Business">Business</h1>
+<p>-Process the request items in service.<br>-split data into different time range of processing .</p>
+<p><br><br><img src="http://www.lan-liang.me/img/Single_node_structure_process_high_concurrent.png"></p>
 
 			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 			<!-- bb -->
@@ -147,9 +146,9 @@ Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/12/12/Software-Evolution-Business-View/" data-id="xq25sp8v1bftyorz" class="article-share-link">Share</a>
+      <a data-url="http://www.lan-liang.me/2016/05/01/single-node-high-concurent/" data-id="p03ov5k0iya2427y" class="article-share-link">Share</a>
       
-        <a href="http://www.lan-liang.me/2015/12/12/Software-Evolution-Business-View/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://www.lan-liang.me/2016/05/01/single-node-high-concurent/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
@@ -160,19 +159,10 @@ Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
     
 <nav id="article-nav">
   
-    <a href="/2015/12/24/-Net-coding-performance/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          About .Net coding performance
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/01/db-scale-out/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Software Architecture Evolution [structure]</div>
+      <div class="article-nav-title">Data base scale out</div>
     </a>
   
 </nav>
@@ -277,7 +267,7 @@ Clients : mobile (IOS , adroid, WP) , API, WAP ;third party systems .">
 <script>
   var disqus_shortname = 'iorilan';
   
-  var disqus_url = 'http://www.lan-liang.me/2015/12/12/Software-Evolution-Business-View/';
+  var disqus_url = 'http://www.lan-liang.me/2016/05/01/single-node-high-concurent/';
   
   (function(){
     var dsq = document.createElement('script');
