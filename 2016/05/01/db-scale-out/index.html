@@ -4,17 +4,30 @@
 
   <meta charset="utf-8">
   
-  <title>Category: Software Engineering | Lan Liang Blog</title>
+  <title>Data base scale out | Lan Liang Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iorilan@hotmail.com">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lan Liang Blog">
-<meta property="og:url" content="http://www.lan-liang.me/categories/Software-Engineering/">
+  <meta name="description" content="Horizental
+
+say hash strategy is ID .
+
+-ID % table_Count == 0 : table_0-ID % table_Count == 1 : table_1-ID % table_Count == 2 : table_2-…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data base scale out">
+<meta property="og:url" content="http://www.lan-liang.me/2016/05/01/db-scale-out/">
 <meta property="og:site_name" content="Lan Liang Blog">
-<meta property="og:description" content="iorilan@hotmail.com">
+<meta property="og:description" content="Horizental
+
+say hash strategy is ID .
+
+-ID % table_Count == 0 : table_0-ID % table_Count == 1 : table_1-ID % table_Count == 2 : table_2-…">
+<meta property="og:image" content="../DB_scaleout.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lan Liang Blog">
-<meta name="twitter:description" content="iorilan@hotmail.com">
+<meta name="twitter:title" content="Data base scale out">
+<meta name="twitter:description" content="Horizental
+
+say hash strategy is ID .
+
+-ID % table_Count == 0 : table_0-ID % table_Count == 1 : table_1-ID % table_Count == 2 : table_2-…">
 
   
     <link rel="alternative" href="/atom.xml" title="Lan Liang Blog" type="application/atom+xml">
@@ -64,87 +77,88 @@
   </div>
 </div>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/01/06/code-patterns-in-net/" class="archive-article-date">
-  <time datetime="2016-01-06T08:49:05.000Z" itemprop="datePublished">Jan 6</time>
+        <section id="main"><article id="post-db-scale-out" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/01/db-scale-out/" class="article-date">
+  <time datetime="2016-05-01T08:37:44.000Z" itemprop="datePublished">May 1 2016</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Design/">Design</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/06/code-patterns-in-net/">Code Patterns in .Net</a>
+    <h1 class="article-title" itemprop="name">
+      Data base scale out
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/04/25/Good-Or-Bad/" class="archive-article-date">
-  <time datetime="2015-04-25T08:56:00.000Z" itemprop="datePublished">Apr 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/25/Good-Or-Bad/">Good Or Bad</a>
-    </h1>
-  
+        <h1 id="Horizental">Horizental</h1>
+<ul>
+<li>say hash strategy is ID .</li>
+</ul>
+<p>-ID % table_Count == 0 : table_0<br>-ID % table_Count == 1 : table_1<br>-ID % table_Count == 2 : table_2<br>-…<br><a id="more"></a><br>-ID % table_count == k : table_k</p>
+<p>k is [0, table_count)</p>
+<h1 id="Vertical">Vertical</h1>
+<p>-User management : User_DB<br>-Payment : Payment_DB</p>
+<p>-one module one DB</p>
+<h1 id="example">example</h1>
+<p>-get User Id = 7 record (say total 10 user tables).<br>-get Payment Id from [0-20] records (say table 10 payment tables) .<br>-update User Id from [0-5] records (say , 10 tables)</p>
+<p><br><br><img src="../DB_scaleout.png"></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/04/12/Priority/" class="archive-article-date">
-  <time datetime="2015-04-12T08:14:36.000Z" itemprop="datePublished">Apr 12</time>
-</a>
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- bb -->
+			<ins class="adsbygoogle"
+				 style="display:block"
+				 data-ad-client="ca-pub-1921328751842505"
+				 data-ad-slot="2140869273"
+				 data-ad-format="auto"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/12/Priority/">Priority</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lan-liang.me/2016/05/01/db-scale-out/" data-id="gc8o2riphbne1lsb" class="article-share-link">Share</a>
+      
+        <a href="http://www.lan-liang.me/2016/05/01/db-scale-out/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/25/a-note-scale-out/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">a small note of scale out (not scale up)</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 </section>
         
           
@@ -236,11 +250,13 @@
 <script>
   var disqus_shortname = 'iorilan';
   
+  var disqus_url = 'http://www.lan-liang.me/2016/05/01/db-scale-out/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
