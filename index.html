@@ -66,6 +66,232 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-FromMvcHanderToController" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/19/FromMvcHanderToController/" class="article-date">
+  <time datetime="2016-08-19T06:21:15.000Z" itemprop="datePublished">Aug 19 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Development/">Development</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/FromMvcHanderToController/">Thinking in Asp.Net MVC - (From MVCHandler to controller)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Thinking_in_Asp_Net_MVC_-_(From_MVCHandler_to_controller)">Thinking in Asp Net MVC - (From MVCHandler to controller)</h2>
+<ul>
+<li>Controller hierarchy</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">interface IController{</div><div class="line">	void Execute (RequestContext requestContext);</div><div class="line">}</div><div class="line"></div><div class="line">interface AsyncController: IController{</div><div class="line">	IAsyncResult BegineExecute (RequestContext requestContext, AsyncCallback callback, object state);</div><div class="line">	void 	     EndExecute (IAsyncResult asyncResult);</div><div class="line">}</div><div class="line"></div><div class="line">class ControllerBase :IController {</div><div class="line">	virtual  void 		Execute(RequestContext requestContext);</div><div class="line">	abstract void 		ExecuteCore();</div><div class="line">		 void 		IController.Execute(RequestContext requestContext);</div><div class="line">	ControllerContext 	ControllerContext {ger;set;}</div><div class="line">	TempDataDictionary 	TempData {get;set;}</div><div class="line">		object 		ViewBag { [<span class="keyword">return</span> :Dynamic] get;}</div><div class="line">	ViewDataDictionary	ViewData {get;set;}</div><div class="line">}</div><div class="line"></div><div class="line">class ControllerContext{</div><div class="line">	ControllerContext(RequestContext requestContext, ContollerBase controller);</div><div class="line">	ControllerContext(HttpContextBase httpContext, RouteData routeData, ControllerBase controller);</div><div class="line">	virtual ControllerBase 		Controller 	{ get;set; }</div><div class="line">	RequestContext 			RequestContext  { get;set; }</div><div class="line">	virtual HTTPContextBase 	HttpContext	{ get;set; }</div><div class="line">	virtual RouteData		RouteData	{ get;set; }</div><div class="line">}</div><div class="line"></div><div class="line">abstract class controller :</div><div class="line">ControllerBase,</div><div class="line">IController,</div><div class="line">IAsyncController,</div><div class="line">IActionFilter,</div><div class="line">IAuthorizationFilter,</div><div class="line">IExceptionFilter,</div><div class="line">IResultFilter,</div><div class="line">IDisposable</div><div class="line">{</div><div class="line">	<span class="keyword">...</span></div><div class="line">	virtual void		Execute (<span class="keyword">...</span>)</div><div class="line">	virtual void 		ExecuteCore()</div><div class="line">	virtual IAsyncResult 	BeginExecute(..)</div><div class="line">	virtual void 		EndExecute(<span class="keyword">...</span>)</div><div class="line">	virtual IAsyncResult	BeginExecuteCore(<span class="keyword">...</span>)</div><div class="line">	virtual void 		EndExecuteCore(<span class="keyword">...</span>)</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="Design_points">Design points</h2>
+<ul>
+<li>interface to saperate the sync and async</li>
+<li>provide base class and include the common implementations for ‘sync’ behavior</li>
+<li>inside the ControllerBase class , very clearly defined what must be overrided(abstract) and what can be overrided(virtual)</li>
+<li>provide a ‘common place’ to transfer/store data (XXX_Dictionary, object) for child classes</li>
+<li>a object link to HTTP Request(ControllerContext)</li>
+<li>the ControllerContext object is the ‘glue’ of Controller world, HTTPRequest and route data.from this object itself , provided all information about each HTTP Request ‘life cycle’.</li>
+<li>the abstract ‘Controller’ class is a facade encapsolation where should inherit from , provided default implementations of async behavior and different filters . also ‘virtual’ the Execution logic so that children can change as they want .</li>
+</ul>
+<p>This is from the static structure point of view .now stand from the creation point of view ,see what happens during the creation of a controller.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IControllerFactory</span></span>{</div><div class="line">    IController CreateController(RequestContext                     requestContext, </div><div class="line">                <span class="keyword">string</span> controllerName); </div><div class="line">                </div><div class="line">SessionStateBehavior GetControllerSessionBehavior( </div><div class="line">                RequestContext requestContext,                      <span class="keyword">string</span> controllerName); </div><div class="line"></div><div class="line"><span class="keyword">void</span>            ReleaseController(IController controller); </div><div class="line">}</div><div class="line"></div><div class="line">Enum SessionStateBehavior {</div><div class="line">Default,Required,ReadOnly,Disabled</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ControllerBuilder</span></span>{</div><div class="line">    IcontrollerFactory GetControllerFactory();</div><div class="line">    <span class="keyword">void</span> SetControllerFactory(Type controllerFactoryType);</div><div class="line">    <span class="keyword">void</span> SetControllerFactory(IControllerFactory controllerFactory);</div><div class="line">    HashSet&lt;<span class="keyword">string</span>&gt; DefaultNamespaces {<span class="keyword">get</span>;}</div><div class="line">    <span class="keyword">static</span> ControllerBuilder Current {<span class="keyword">get</span>;}</div><div class="line">}</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MvcRouteHandler</span> : <span class="title">IRouteHandler</span></span>{</div><div class="line">    IControllerFactory  controllerFactory; </div><div class="line"></div><div class="line">    MvcRouteHandler (IControllerFactory         controllerFactory) {</div><div class="line">    ...</div><div class="line"><span class="keyword">return</span> <span class="keyword">new</span> MvcHandler(requestContext); </div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Controller Creation</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">URL Routing-&gt;</div><div class="line">HTTPRouteHandler -&gt;</div><div class="line">Create Controller Builder -&gt;</div><div class="line">Create Controller Factory -&gt;</div><div class="line">Create Controller</div></pre></td></tr></table></figure>
+
+
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- bb -->
+			<ins class="adsbygoogle"
+				 style="display:block"
+				 data-ad-client="ca-pub-1921328751842505"
+				 data-ad-slot="2140869273"
+				 data-ad-format="auto"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lan-liang.me/2016/08/19/FromMvcHanderToController/" data-id="28u2crri4argx9r3" class="article-share-link">Share</a>
+      
+        <a href="http://www.lan-liang.me/2016/08/19/FromMvcHanderToController/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/-Net/">.Net</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-HTTPRequest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/01/HTTPRequest/" class="article-date">
+  <time datetime="2016-08-01T06:21:15.000Z" itemprop="datePublished">Aug 1 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Development/">Development</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/01/HTTPRequest/">Thinking in Asp.Net MVC - (Http Request Route parsing)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Thinking_in_Asp_Net_MVC_-_(Http_Request_Route_parsing)">Thinking in Asp Net MVC - (Http Request Route parsing)</h2>
+<p>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/01/HTTPRequest/#more">More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lan-liang.me/2016/08/01/HTTPRequest/" data-id="5yewpyj7341v2ejn" class="article-share-link">Share</a>
+      
+        <a href="http://www.lan-liang.me/2016/08/01/HTTPRequest/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/-Net/">.Net</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post--IIS5To-IIS8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/10/-IIS5To-IIS8/" class="article-date">
+  <time datetime="2016-07-10T06:21:15.000Z" itemprop="datePublished">Jul 10 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Development/">Development</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/10/-IIS5To-IIS8/">From IIS 5 to IIS 8</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="IIS_5">IIS 5</h2>
+
+        
+          <p class="article-more-link">
+            <a href="/2016/07/10/-IIS5To-IIS8/#more">More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lan-liang.me/2016/07/10/-IIS5To-IIS8/" data-id="wqylg9redfyactzc" class="article-share-link">Share</a>
+      
+        <a href="http://www.lan-liang.me/2016/07/10/-IIS5To-IIS8/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/-net/">.net</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SharePointArchitecturePractise" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/24/SharePointArchitecturePractise/" class="article-date">
+  <time datetime="2016-06-24T06:21:15.000Z" itemprop="datePublished">Jun 24 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Development/">Development</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/24/SharePointArchitecturePractise/">Recommendations for the Infrastructure layer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Recommendations_for_the_Infrastructure_layer:">Recommendations for the Infrastructure layer:</h2>
+<p>
+        
+          <p class="article-more-link">
+            <a href="/2016/06/24/SharePointArchitecturePractise/#more">More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/" data-id="f91ghqkkdoxo6b0e" class="article-share-link">Share</a>
+      
+        <a href="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sharepoint/">sharepoint</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-single-node-high-concurent" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/01/single-node-high-concurent/" class="article-date">
@@ -222,219 +448,9 @@
 
 
   
-    <article id="post-code-patterns-in-net" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/01/06/code-patterns-in-net/" class="article-date">
-  <time datetime="2016-01-06T08:49:05.000Z" itemprop="datePublished">Jan 6 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Software-Engineering/">Software Engineering</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/06/code-patterns-in-net/">Code Patterns in .Net</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="-NET编码中常用的模式">.NET编码中常用的模式</h1>
-<blockquote>
-<p>引用《代码大全》 的一句话 ： “模式是用来管理复杂度的。”<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/01/06/code-patterns-in-net/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2016/01/06/code-patterns-in-net/" data-id="ugiyvitl5anhz7o6" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2016/01/06/code-patterns-in-net/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post--Net-coding-performance" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/24/-Net-coding-performance/" class="article-date">
-  <time datetime="2015-12-24T06:21:15.000Z" itemprop="datePublished">Dec 24 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design/">Design</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/24/-Net-coding-performance/">About .Net coding performance</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="[GC_Basic]">[GC Basic]</h2>
-<blockquote>
-<p>In a managed process there are two types of heaps—native and managed. Native heaps are allocated with the VirtualAlloc Windows API and used by the operating system and CLR for unmanaged memory such as that for the Windows API, OS data structures, and even much of the CLR. The CLR allocates all managed .NET objects on the managed heap, also called the GC heap, because the objects on it are subject to garbage collection.<br>
-        
-          <p class="article-more-link">
-            <a href="/2015/12/24/-Net-coding-performance/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/12/24/-Net-coding-performance/" data-id="l2qaoe3euxd80qhg" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2015/12/24/-Net-coding-performance/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance/">Performance</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Software-Evolution-Business-View" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/12/Software-Evolution-Business-View/" class="article-date">
-  <time datetime="2015-12-12T14:49:05.000Z" itemprop="datePublished">Dec 12 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design/">Design</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/12/Software-Evolution-Business-View/">software architecture evolution [business view]</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Including">Including</h2>
-<ul>
-<li><p>Access Point</p>
-<blockquote>
-<p>Clients : mobile (IOS , adroid, WP) , API, WAP ;<br>third party systems .</p>
-
-        
-          <p class="article-more-link">
-            <a href="/2015/12/12/Software-Evolution-Business-View/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/12/12/Software-Evolution-Business-View/" data-id="xq25sp8v1bftyorz" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2015/12/12/Software-Evolution-Business-View/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Software-Architecture-Evolution-From-traditional-to-now" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/" class="article-date">
-  <time datetime="2015-12-12T13:49:05.000Z" itemprop="datePublished">Dec 12 2015</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Design/">Design</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/">Software Architecture Evolution [structure]</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="before">before</h2>
-<ul>
-<li><p>Http</p>
-<blockquote>
-<p>Http Handler, Http Module , MVC .</p>
-
-        
-          <p class="article-more-link">
-            <a href="/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/#more">More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/" data-id="txzp552wfhdy0v8r" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2015/12/12/Software-Architecture-Evolution-From-traditional-to-now/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -446,7 +462,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Career/">Career</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design/">Design</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Career/">Career</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Design/">Design</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Development/">Development</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software-Engineering/">Software Engineering</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -458,23 +474,23 @@
       <ul>
         
           <li>
+            <a href="/2016/08/19/FromMvcHanderToController/">Thinking in Asp.Net MVC - (From MVCHandler to controller)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/01/HTTPRequest/">Thinking in Asp.Net MVC - (Http Request Route parsing)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/10/-IIS5To-IIS8/">From IIS 5 to IIS 8</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/24/SharePointArchitecturePractise/">Recommendations for the Infrastructure layer</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/01/single-node-high-concurent/">single_node_high_concurent</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/01/db-scale-out/">Data base scale out</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/25/a-note-scale-out/">a small note of scale out (not scale up)</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/06/code-patterns-in-net/">Code Patterns in .Net</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/24/-Net-coding-performance/">About .Net coding performance</a>
           </li>
         
       </ul>
@@ -486,7 +502,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Environment/">Environment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Team/">Team</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mark-down/">mark down</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/-Net/">.Net</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/-net/">.net</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design/">Design</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Environment/">Environment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Software-Engineering/">Software Engineering</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Team/">Team</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mark-down/">mark down</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sharepoint/">sharepoint</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -495,7 +511,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
