@@ -4,17 +4,17 @@
 
   <meta charset="utf-8">
   
-  <title>Recommendations for the Infrastructure layer | Lan Liang Blog</title>
+  <title>Tag: DevOps | Lan Liang Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Recommendations for the Infrastructure layer:">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Recommendations for the Infrastructure layer">
-<meta property="og:url" content="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/">
+  <meta name="description" content="iorilan@hotmail.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lan Liang Blog">
+<meta property="og:url" content="http://www.lan-liang.me/tags/DevOps/">
 <meta property="og:site_name" content="Lan Liang Blog">
-<meta property="og:description" content="Recommendations for the Infrastructure layer:">
+<meta property="og:description" content="iorilan@hotmail.com">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Recommendations for the Infrastructure layer">
-<meta name="twitter:description" content="Recommendations for the Infrastructure layer:">
+<meta name="twitter:title" content="Lan Liang Blog">
+<meta name="twitter:description" content="iorilan@hotmail.com">
 
   
     <link rel="alternative" href="/atom.xml" title="Lan Liang Blog" type="application/atom+xml">
@@ -64,121 +64,39 @@
   </div>
 </div>
       <div class="outer">
-        <section id="main"><article id="post-SharePointArchitecturePractise" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/24/SharePointArchitecturePractise/" class="article-date">
-  <time datetime="2016-06-24T06:21:15.000Z" itemprop="datePublished">Jun 24 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Development/">Development</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Recommendations for the Infrastructure layer
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/12/10/SoftwareDelivery-Process-And-More/" class="archive-article-date">
+  <time datetime="2016-12-10T09:57:58.000Z" itemprop="datePublished">Dec 10</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/12/10/SoftwareDelivery-Process-And-More/">Software Delivery</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Recommendations_for_the_Infrastructure_layer:">Recommendations for the Infrastructure layer:</h2>
-<p><a id="more"></a></p>
-<ul>
-<li>Do not use dynamic memory for SharePoint VMs because this is not<br>supported by SharePoint.</li>
-<li>Use VLANs to divide the traffic (i.e. a central admin site and end user<br>sites) and to make SharePoint more secure.</li>
-<li>Do not use time synchronization with the parent host for the SharePoint<br>VM because it can mess up SharePoint Timer jobs and led to<br>unpredictable behavior.</li>
-<li>Do not take any snapshots of a VM in a production environment because<br>these will degrade the performance of your VM.</li>
-<li>Use Jumbo frames on your network if you have the right equipment,<br>because they will help your network to perform faster.</li>
-<li>Check with your storage guy what NTFS allocation unit size is best for<br>your storage to improve the performance of your SharePoint site.</li>
-</ul>
-<h2 id="Recommendations_for_the_SQL_Server_layer:">Recommendations for the SQL Server layer:</h2>
-<ul>
-<li>Data partitions that holds databases should have an allocation unit size<br>of 64k (in most cases) to get the best performance from SQL server.</li>
-<li>You should put TempDB on a separate (faster) drive to boost<br>performance because this database is I/O intensive.</li>
-<li>Logs for your databases shouldn’t be on same drive as the database files,<br>again for performance reasons.</li>
-<li>MAXDOP must be set to 1 for SharePoint to work normally.</li>
-<li>You should restrict the minimum and maximum memory values for your<br>SQL server.</li>
-<li>Do not enable auto-create statistics on a SQL instance that hosts<br>SharePoint databases because is not supported.</li>
-<li>Use reasonable initial settings for your SharePoint databases, especially<br>the growth value (the default is 5 MB).</li>
-</ul>
-<h2 id="Recommendations_for_the_SharePoint_layer:">Recommendations for the SharePoint layer:</h2>
-<ul>
-<li>You will have a couple of installers that you can modify for you needs </li>
-<li>use the PowerShell installer instead of the built-in Configuration Wizard.</li>
-<li>Use dedicated service accounts </li>
-<li>this is good security practice because<br>these accounts will have only the rights that they really need.</li>
-<li>Use caching </li>
-<li>this will speed up responses for end users.</li>
-<li>Use SSL for the central administration site.</li>
-<li>Patch your SharePoint regularly and take backups.</li>
-<li>Write the logs from SharePoint to another drive </li>
-<li>if you forget to set<br>logging up properly (i.e. trimming of logs), you can fill up the system<br>partition and stop the whole server.</li>
-</ul>
-<blockquote>
-<p><a href="https://technet.microsoft.com/en-us/library/hh292622.aspx?f=255&amp;MSPPError=-2147217396" target="_blank" rel="external">https://technet.microsoft.com/en-us/library/hh292622.aspx?f=255&amp;MSPPError=-2147217396</a></p>
-</blockquote>
-
-			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- bb -->
-			<ins class="adsbygoogle"
-				 style="display:block"
-				 data-ad-client="ca-pub-1921328751842505"
-				 data-ad-slot="2140869273"
-				 data-ad-format="auto"></ins>
-			<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/" data-id="f91ghqkkdoxo6b0e" class="article-share-link">Share</a>
-      
-        <a href="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sharepoint/">sharepoint</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/07/10/-IIS5To-IIS8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          From IIS 5 to IIS 8
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/05/01/single-node-high-concurent/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">single_node_high_concurent</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
+  
+  
+    </div></section>
+  
 </section>
         
           
@@ -270,13 +188,11 @@
 <script>
   var disqus_shortname = 'iorilan';
   
-  var disqus_url = 'http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/';
-  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>

@@ -4,17 +4,26 @@
 
   <meta charset="utf-8">
   
-  <title>Recommendations for the Infrastructure layer | Lan Liang Blog</title>
+  <title>Software Delivery | Lan Liang Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Recommendations for the Infrastructure layer:">
+  <meta name="description" content="The Team
+
+Developer, Developer(or Learner) , Developer(or Learner) , User.
+Yes ,the most efficient way is to make sure development team hear from user ASAP , sit down with the user to BUILD it(not cop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Recommendations for the Infrastructure layer">
-<meta property="og:url" content="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/">
+<meta property="og:title" content="Software Delivery">
+<meta property="og:url" content="http://www.lan-liang.me/2016/12/10/SoftwareDelivery-Process-And-More/">
 <meta property="og:site_name" content="Lan Liang Blog">
-<meta property="og:description" content="Recommendations for the Infrastructure layer:">
+<meta property="og:description" content="The Team
+
+Developer, Developer(or Learner) , Developer(or Learner) , User.
+Yes ,the most efficient way is to make sure development team hear from user ASAP , sit down with the user to BUILD it(not cop">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Recommendations for the Infrastructure layer">
-<meta name="twitter:description" content="Recommendations for the Infrastructure layer:">
+<meta name="twitter:title" content="Software Delivery">
+<meta name="twitter:description" content="The Team
+
+Developer, Developer(or Learner) , Developer(or Learner) , User.
+Yes ,the most efficient way is to make sure development team hear from user ASAP , sit down with the user to BUILD it(not cop">
 
   
     <link rel="alternative" href="/atom.xml" title="Lan Liang Blog" type="application/atom+xml">
@@ -64,16 +73,12 @@
   </div>
 </div>
       <div class="outer">
-        <section id="main"><article id="post-SharePointArchitecturePractise" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SoftwareDelivery-Process-And-More" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/24/SharePointArchitecturePractise/" class="article-date">
-  <time datetime="2016-06-24T06:21:15.000Z" itemprop="datePublished">Jun 24 2016</time>
+    <a href="/2016/12/10/SoftwareDelivery-Process-And-More/" class="article-date">
+  <time datetime="2016-12-10T09:57:58.000Z" itemprop="datePublished">Dec 10 2016</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Development/">Development</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -82,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Recommendations for the Infrastructure layer
+      Software Delivery
     </h1>
   
 
@@ -90,42 +95,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Recommendations_for_the_Infrastructure_layer:">Recommendations for the Infrastructure layer:</h2>
+        <h2 id="The_Team">The Team</h2>
+<ul>
+<li>Developer, Developer(or Learner) , Developer(or Learner) , User.</li>
+<li>Yes ,the most efficient way is to make sure development team hear from user ASAP , sit down with the user to BUILD it(not copy paste codes try and try with luck),test it, demo it. your team is not like that? It’s ok. Mine is not as well .as long as everyone in team is a technical learner ,at least can understand code. But why ?</li>
+<li>requirement need to be translated into technical terms , estamation need the basic understanding about how to BUILD it .software grows up from business ,also need the knowledge in different stages. there are 3 main stages in modern softwares :<br>— stage 1 :Running . Yes , it’s working well and being used by 1000-2000 users every day. how about 1 million ,10 million per second requests on server ?<br>— stage 2 :Runing under high Concurrent. It’s a public facing internet product ,being used by millions users . how to make it smart ?<br>— stage 3 :A Smart system. data is ready ,now it’s the time to add some machine learning features into system , prediction or catagorize . user will thank you .</li>
+</ul>
 <p><a id="more"></a></p>
+<h2 id="The_Process">The Process</h2>
 <ul>
-<li>Do not use dynamic memory for SharePoint VMs because this is not<br>supported by SharePoint.</li>
-<li>Use VLANs to divide the traffic (i.e. a central admin site and end user<br>sites) and to make SharePoint more secure.</li>
-<li>Do not use time synchronization with the parent host for the SharePoint<br>VM because it can mess up SharePoint Timer jobs and led to<br>unpredictable behavior.</li>
-<li>Do not take any snapshots of a VM in a production environment because<br>these will degrade the performance of your VM.</li>
-<li>Use Jumbo frames on your network if you have the right equipment,<br>because they will help your network to perform faster.</li>
-<li>Check with your storage guy what NTFS allocation unit size is best for<br>your storage to improve the performance of your SharePoint site.</li>
+<li>Agile or Waterfall . As for now ,IT industry not there yet ,ALWAYS (REAL, not so called)agile .No one has the idea how to follow a certain standard flow (that’s why SDLC does not work) .so we must try and fail fast then try again .</li>
+<li>NO RUSH . The Unit Test, The Refactor . The Code Review . Trust me ,Quality make sence , most times , It means everything.</li>
+<li>Improve Quality of existing feature before building new feature ; Test more , Refactor more , Talk less .</li>
 </ul>
-<h2 id="Recommendations_for_the_SQL_Server_layer:">Recommendations for the SQL Server layer:</h2>
-<ul>
-<li>Data partitions that holds databases should have an allocation unit size<br>of 64k (in most cases) to get the best performance from SQL server.</li>
-<li>You should put TempDB on a separate (faster) drive to boost<br>performance because this database is I/O intensive.</li>
-<li>Logs for your databases shouldn’t be on same drive as the database files,<br>again for performance reasons.</li>
-<li>MAXDOP must be set to 1 for SharePoint to work normally.</li>
-<li>You should restrict the minimum and maximum memory values for your<br>SQL server.</li>
-<li>Do not enable auto-create statistics on a SQL instance that hosts<br>SharePoint databases because is not supported.</li>
-<li>Use reasonable initial settings for your SharePoint databases, especially<br>the growth value (the default is 5 MB).</li>
-</ul>
-<h2 id="Recommendations_for_the_SharePoint_layer:">Recommendations for the SharePoint layer:</h2>
-<ul>
-<li>You will have a couple of installers that you can modify for you needs </li>
-<li>use the PowerShell installer instead of the built-in Configuration Wizard.</li>
-<li>Use dedicated service accounts </li>
-<li>this is good security practice because<br>these accounts will have only the rights that they really need.</li>
-<li>Use caching </li>
-<li>this will speed up responses for end users.</li>
-<li>Use SSL for the central administration site.</li>
-<li>Patch your SharePoint regularly and take backups.</li>
-<li>Write the logs from SharePoint to another drive </li>
-<li>if you forget to set<br>logging up properly (i.e. trimming of logs), you can fill up the system<br>partition and stop the whole server.</li>
-</ul>
-<blockquote>
-<p><a href="https://technet.microsoft.com/en-us/library/hh292622.aspx?f=255&amp;MSPPError=-2147217396" target="_blank" rel="external">https://technet.microsoft.com/en-us/library/hh292622.aspx?f=255&amp;MSPPError=-2147217396</a></p>
-</blockquote>
 
 			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 			<!-- bb -->
@@ -140,12 +122,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/" data-id="f91ghqkkdoxo6b0e" class="article-share-link">Share</a>
+      <a data-url="http://www.lan-liang.me/2016/12/10/SoftwareDelivery-Process-And-More/" data-id="iv87b8hrxamskmrf" class="article-share-link">Share</a>
       
-        <a href="http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://www.lan-liang.me/2016/12/10/SoftwareDelivery-Process-And-More/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sharepoint/">sharepoint</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DevOps/">DevOps</a></li></ul>
 
     </footer>
   </div>
@@ -153,19 +135,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/07/10/-IIS5To-IIS8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          From IIS 5 to IIS 8
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/01/single-node-high-concurent/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/09/17/tellDontAsk/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">single_node_high_concurent</div>
+      <div class="article-nav-title">Tell , Don&#39;t Ask</div>
     </a>
   
 </nav>
@@ -270,7 +243,7 @@
 <script>
   var disqus_shortname = 'iorilan';
   
-  var disqus_url = 'http://www.lan-liang.me/2016/06/24/SharePointArchitecturePractise/';
+  var disqus_url = 'http://www.lan-liang.me/2016/12/10/SoftwareDelivery-Process-And-More/';
   
   (function(){
     var dsq = document.createElement('script');
