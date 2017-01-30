@@ -4,17 +4,17 @@
 
   <meta charset="utf-8">
   
-  <title>a small note of scale out (not scale up) | Lan Liang Blog</title>
+  <title>Lan Liang Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Scale out  = High Availablility + Scalable">
-<meta property="og:type" content="article">
-<meta property="og:title" content="a small note of scale out (not scale up)">
-<meta property="og:url" content="http://www.lan-liang.me/2016/03/25/a-note-scale-out/">
+  <meta name="description" content="iorilan@hotmail.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lan Liang Blog">
+<meta property="og:url" content="http://www.lan-liang.me/page/4/">
 <meta property="og:site_name" content="Lan Liang Blog">
-<meta property="og:description" content="Scale out  = High Availablility + Scalable">
+<meta property="og:description" content="iorilan@hotmail.com">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="a small note of scale out (not scale up)">
-<meta name="twitter:description" content="Scale out  = High Availablility + Scalable">
+<meta name="twitter:title" content="Lan Liang Blog">
+<meta name="twitter:description" content="iorilan@hotmail.com">
 
   
     <link rel="alternative" href="/atom.xml" title="Lan Liang Blog" type="application/atom+xml">
@@ -64,14 +64,16 @@
   </div>
 </div>
       <div class="outer">
-        <section id="main"><article id="post-a-note-scale-out" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Hexo Config" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/03/25/a-note-scale-out/" class="article-date">
-  <time datetime="2016-03-25T08:06:40.000Z" itemprop="datePublished">Mar 25 2016</time>
+    <a href="/2015/01/10/Hexo Config/" class="article-date">
+  <time datetime="2015-01-10T08:25:59.000Z" itemprop="datePublished">Jan 10 2015</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Design/">Design</a>
+    <a class="article-category-link" href="/categories/tools/">tools</a>
   </div>
 
   </div>
@@ -81,8 +83,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      a small note of scale out (not scale up)
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/10/Hexo Config/">Setup your blog with github+hexo</a>
     </h1>
   
 
@@ -90,102 +92,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Scale_out_=_High_Availablility_+_Scalable">Scale out  = High Availablility + Scalable</h1>
-<p><a id="more"></a></p>
-<h2 id="HA">HA</h2>
+        <h2 id="setup_[username]-github-io">setup [username].github.io</h2>
 <ul>
-<li>single machine, any hardware or exception happens , service will be down.</li>
-<li>to make service HA , has to change single node to cluster.</li>
-</ul>
-<h3 id="Service_Gateway">Service Gateway</h3>
-<ul>
-<li>DNS Heartbeat IP + IP binding. so that new comming machine will be located ip automaticly.</li>
-</ul>
-<h3 id="Business_Layer">Business Layer</h3>
-<ul>
-<li>keep stateless ,and use RPC (Remote Procedure call) service framework to do API call.</li>
-</ul>
-<h3 id="Cache">Cache</h3>
-<ul>
-<li>multiple cache server , use K-V Db. (should be careful with cache and DB syncronization)</li>
-</ul>
-<h3 id="DB">DB</h3>
-<ul>
-<li>ReplicaSet. master + slave.</li>
-</ul>
-<h2 id="Scalable">Scalable</h2>
-<ul>
-<li>defination : As business grows ,the increasing valumn can be supported by adding new node (machine) into existing cluster , then it means the service is scalable (or scale out).</li>
-</ul>
-<h3 id="Service_Gateway-1">Service Gateway</h3>
-<ul>
-<li>request distribution server cluster, consider Ngix servers.</li>
-</ul>
-<h3 id="Business_Layer-1">Business Layer</h3>
-<ul>
-<li>keep Stateless, RPC (Remote Procedure call) service framework.</li>
-</ul>
-<h3 id="Cache-1">Cache</h3>
-<ul>
-<li>Consistent Hashing algorithm .</li>
-</ul>
-<h3 id="DB-1">DB</h3>
-<ul>
-<li>Sharding , Data Routing strategy + Distributed Table.</li>
-</ul>
-
-			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- bb -->
-			<ins class="adsbygoogle"
-				 style="display:block"
-				 data-ad-client="ca-pub-1921328751842505"
-				 data-ad-slot="2140869273"
-				 data-ad-format="auto"></ins>
-			<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
+<li>create git repo ,repo name is [username].github.io</li>
+<li>put something.txt and push to your master </li>
+<li>access [username].github.io </li>
+<li>first time access it will takes around 10-20 mins</li>
+<li>make sure your github.io works then start hexo setup.
+        
+          <p class="article-more-link">
+            <a href="/2015/01/10/Hexo Config/#more">More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.lan-liang.me/2016/03/25/a-note-scale-out/" data-id="qtiui3drog6neslh" class="article-share-link">Share</a>
+      <a data-url="http://www.lan-liang.me/2015/01/10/Hexo Config/" data-id="4h762h9w5uiszuf0" class="article-share-link">Share</a>
       
-        <a href="http://www.lan-liang.me/2016/03/25/a-note-scale-out/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://www.lan-liang.me/2015/01/10/Hexo Config/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design/">Design</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Environment/">Environment</a></li></ul>
 
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2016/05/01/db-scale-out/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Data base scale out
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/01/06/code-patterns-in-net/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Code Patterns in .Net</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
 
-<section id="comments">
-  <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  </div>
-</section>
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
 </section>
         
           
@@ -277,13 +217,11 @@
 <script>
   var disqus_shortname = 'iorilan';
   
-  var disqus_url = 'http://www.lan-liang.me/2016/03/25/a-note-scale-out/';
-  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
